@@ -1,5 +1,4 @@
 #encoding: utf-8
-#
 require 'mechanize'
 require 'date'
 require_relative 'apartment.rb'
@@ -7,6 +6,10 @@ require_relative 'apartment.rb'
 class Parser
 
   BASE_PATH = "http://www.finn.no/finn/realestate/lettings/object?finnkode="
+
+  def self.base_path
+    return BASE_PATH
+  end
 
   NOT_FOUND_ERROR = "Insertion not found"
   PARSE_ERROR = "Error during import"
