@@ -36,7 +36,6 @@ class Parser
       house_info = parse_objectinfo(page, "Fakta om boligen")
       sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruksareal")]
       apartment.size = sizes.select { |x| x != "" }.first 
-      apartment.size = get_value_of(house_info, "Primærrom")
       apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
       dates = get_value_of(house_info, "Leieperiode")
       if dates != ""
