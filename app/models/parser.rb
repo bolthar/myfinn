@@ -13,8 +13,10 @@ class Parser
     page = agent.get("#{BASE_PATH}#{finn_id}")
     apartment = Apartment.new
     price_infos = parse_objectinfo(page, "Prisinformasjon")
-    apartment.rent = get_value_of(price_infos, "Leie pr måned").split(",").first.gsub(/[^0-9]/, "").to_i
-    apartment.deposit = get_value_of(price_infos, "Depositum").split(",").first.gsub(/[^0-9]/, "").to_i
+    rent = get_value_of(price_infos, "Leie pr måned").split(",").first
+    apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
+    deposit = get_value_of(price_infos, "Depositum").split(",").first
+    apartment.deposit = deposit ? deposit.gsub(/[^0-9]/, "").to_i : nil
     house_info = parse_objectinfo(page, "Fakta om boligen")
     apartment.size = get_value_of(house_info, "Primærrom")
     apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
@@ -27,30 +29,34 @@ class Parser
         apartment.start_date = DateTime.parse(dates.strip)
       end
     end
-    apartment.features = parse_features(page).map do |text|
-      feature = Feature.new
-      feature.description = text
-      feature
+    parse_features(page).each do |text|
+      feature = Feature.find_by_description(text)
+      unless feature
+        feature = Feature.new
+        feature.description = text
+      end
+      apartment.features << feature
     end
-    apartment.contacts = parse_contacts(page).map do |values|
+    apartment.contact_infos = parse_contacts(page).map do |values|
       contact = ContactInfo.new
       contact.type = values.keys.first
       contact.value = values.values.first
       contact
     end
     apartment.html_description = get_description_html(page)
+    apartment.code = finn_id
     return apartment
   end
 
   private 
   def get_value_of(values, target)
     value = values.select { |x| x[target] }.first
-    return value ? value[target] : ""
+    return value && value[target] ? value[target] : ""
   end
 
   def extract_from_dtable(result, dtable)
-    labels = element.search('dt')
-    values = element.search('dd')
+    labels = dtable.search('dt')
+    values = dtable.search('dd')
     labels.zip(values).each do |pair|
       result << { pair[0].inner_text => pair[1].content.strip.split("\r\n").first.strip }
     end

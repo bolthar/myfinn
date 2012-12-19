@@ -8,7 +8,21 @@
 </head>
 <body>
 
-<%= yield %>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">MyFinn</a>
+        <% if current_user %>
+        <p class="navbar-text pull-right">
+        Welcome, User! <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+        </p>
+      <% end %>
+      </div>
+    </div>
+  </div>
 
+  <div class="container">
+<%= yield %>
+  </div> 
 </body>
 </html>
