@@ -5,7 +5,9 @@ Myfinn::Application.routes.draw do
   # first created -> highest priority.
 
   root :to => 'apartments#index'
-  match 'apartments/edit/:id' => 'apartments#edit'
+  post 'apartments/create' => 'apartments#create'
+  match 'apartments/' => 'apartments#index'
+  get 'apartments/:id' => 'apartments#show'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

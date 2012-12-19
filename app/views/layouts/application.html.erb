@@ -6,13 +6,18 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style="background:#eee">
 
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
         <a class="brand" href="#">MyFinn</a>
         <% if current_user %>
+          <ul class="nav">
+            <li><%= link_to "Apartments", apartments_path %></li>
+            <li class="divider-vertical" />
+            <%= render :partial => "create" %>
+          </ul>
         <p class="navbar-text pull-right">
         Welcome, User! <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
         </p>

@@ -1,1 +1,6 @@
 
+<div id="items">
+  <% @apartments.each do |apt| %>
+    <%= render :partial => "item", :locals => { :apartment => apt } %>
+  <% end %>
+</div>

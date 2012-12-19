@@ -8,44 +8,62 @@ class Parser
 
   BASE_PATH = "http://www.finn.no/finn/realestate/lettings/object?finnkode="
 
+  NOT_FOUND_ERROR = "Insertion not found"
+  PARSE_ERROR = "Error during import"
+
   def parse(finn_id)
     agent = Mechanize.new
-    page = agent.get("#{BASE_PATH}#{finn_id}")
-    apartment = Apartment.new
-    price_infos = parse_objectinfo(page, "Prisinformasjon")
-    rent = get_value_of(price_infos, "Leie pr måned").split(",").first
-    apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
-    deposit = get_value_of(price_infos, "Depositum").split(",").first
-    apartment.deposit = deposit ? deposit.gsub(/[^0-9]/, "").to_i : nil
-    house_info = parse_objectinfo(page, "Fakta om boligen")
-    apartment.size = get_value_of(house_info, "Primærrom")
-    apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
-    dates = get_value_of(house_info, "Leieperiode")
-    if dates != ""
-      if dates =~ /\-/
-        apartment.start_date = DateTime.parse(dates.split("-")[0].strip)
-        apartment.end_date   = DateTime.parse(dates.split("-")[1].strip)
-      else
-        apartment.start_date = DateTime.parse(dates.strip)
+    begin
+      page = agent.get("#{BASE_PATH}#{finn_id}")
+    rescue Exception => ex
+      return NOT_FOUND_ERROR
+    end
+    begin
+      apartment = Apartment.new
+      apartment.title = page.search("h1.mal").first.content
+      image_src = page.search("#image_0").first
+      if image_src
+        apartment.image_src = image_src['data-main']
       end
-    end
-    parse_features(page).each do |text|
-      feature = Feature.find_by_description(text)
-      unless feature
-        feature = Feature.new
-        feature.description = text
+      price_infos = parse_objectinfo(page, "Prisinformasjon")
+      rent = get_value_of(price_infos, "Leie pr måned").split(",").first
+      apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
+      deposit = get_value_of(price_infos, "Depositum").split(",").first
+      apartment.deposit = deposit ? deposit.gsub(/[^0-9]/, "").to_i : nil
+      house_info = parse_objectinfo(page, "Fakta om boligen")
+      sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruskareal")]
+      apartment.size = sizes.select { |x| x != "" }.first 
+      apartment.size = get_value_of(house_info, "Primærrom")
+      apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
+      dates = get_value_of(house_info, "Leieperiode")
+      if dates != ""
+        if dates =~ /\-/
+          apartment.start_date = DateTime.parse(dates.split("-")[0].strip)
+          apartment.end_date   = DateTime.parse(dates.split("-")[1].strip)
+        else
+          apartment.start_date = DateTime.parse(dates.strip)
+        end
       end
-      apartment.features << feature
+      parse_features(page).each do |text|
+        feature = Feature.find_by_description(text)
+        unless feature
+          feature = Feature.new
+          feature.description = text
+        end
+        apartment.features << feature
+      end
+      apartment.contact_infos = parse_contacts(page).map do |values|
+        contact = ContactInfo.new
+        contact.type = values.keys.first
+        contact.value = values.values.first
+        contact
+      end
+      apartment.html_description = get_description_html(page)
+      apartment.code = finn_id
+      return apartment
+    rescue Exception => ex
+      return PARSE_ERROR
     end
-    apartment.contact_infos = parse_contacts(page).map do |values|
-      contact = ContactInfo.new
-      contact.type = values.keys.first
-      contact.value = values.values.first
-      contact
-    end
-    apartment.html_description = get_description_html(page)
-    apartment.code = finn_id
-    return apartment
   end
 
   private 

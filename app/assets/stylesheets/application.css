@@ -14,4 +14,54 @@
 
 body {
   padding-top : 40px;
+  background: red;
+}
+
+.container {
+  background: transparent;
+}
+
+#items .image {
+  height: 160px;
+  width: 160px;
+  margin: 10px;
+}
+
+#items .item-container {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #AAA;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px 1px;
+}
+
+#items .item-body {
+  margin-left: 5px;
+}
+
+#items h3 {
+  width: 700px;
+}
+
+#items .item-data {
+  margin: 10px;
+  font-size: 1.2em;
+}
+
+#items .item-data div {
+  margin-right: 10px;
+}
+
+#detail{
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #AAA;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px 1px;
+}
+
+#detail h1 {
+  margin: 10px;
 }

@@ -1,0 +1,42 @@
+
+<div class="item-container">
+  <div class="pull-left">
+    <img src="<%= apartment.image_src %>" class="img-polaroid image" />
+  </div>
+  <div class="pull-left item-body">
+    <h3><%= link_to apartment.title, "/apartments/#{apartment.id}" %></h3>
+    <div class="item-data">
+       <div class="pull-left">
+         <strong>Rent: </strong>
+         <span><%= apartment.rent %></span>
+         <span>NOK</span>
+       </div>
+       <div class="pull-left">
+         <strong>Size: </strong>
+         <span><%= apartment.size %></span>
+       </div>
+       <% if apartment.floor != 0 %>
+         <div class="pull-left">
+           <strong>Floor: </strong>
+           <span><%= apartment.floor %></span>
+         </div>
+       <% end %>
+       <div style="clear:both;"></div>
+    </div>
+    <div class="item-data">
+      <% if apartment.start_date %>
+        <div class="pull-left">
+          <strong>Start date: </strong>
+          <span><%= apartment.start_date.strftime("%d %b %Y") %>
+        </div>
+      <% end %>
+      <% if apartment.end_date %>
+        <div class="pull-left">
+          <strong>End date: </strong>
+          <span><%= apartment.end_date.strftime("%d %b %Y") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<div style="clear:both;"></div>
+</div>
