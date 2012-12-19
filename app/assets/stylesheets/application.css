@@ -21,9 +21,12 @@ body {
   background: transparent;
 }
 
+#items .image-container {
+  width: 30%;
+}
+
 #items .image {
-  height: 160px;
-  width: 160px;
+  height: 200px;
   margin: 10px;
 }
 
@@ -37,11 +40,11 @@ body {
 }
 
 #items .item-body {
-  margin-left: 5px;
+  width: 70%;
 }
 
 #items h3 {
-  width: 700px;
+  width: 100%;
 }
 
 #items .item-data {
