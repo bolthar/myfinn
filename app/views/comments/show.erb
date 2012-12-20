@@ -1,0 +1,22 @@
+
+<script type="text/javascript" >
+
+  $(document).ready(function() {
+      $(".comment-delete").click(function () {
+        $.post("/comments/delete/",
+          { id : $(this).attr("data-id") },
+          function () { refreshComments($("#apartment-id").val()); });
+      });
+  });
+</script>
+<div id="comments">
+  <% if @comments.empty? %>
+    <i>No comments yet!</i>
+  <% else %>
+    <div id="comments-body">
+      <% @comments.each do |comment| %>
+        <%= render :partial => "comment", :locals => { :comment => comment } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -26,7 +26,7 @@ body {
 }
 
 #items .image {
-  height: 160px;
+  height: 180px;
   margin: 10px;
 }
 
@@ -37,6 +37,10 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   box-shadow: 2px 2px 2px 1px;
+}
+
+#items .item-container .user-info {
+  margin:10px 0px 10px 10px;
 }
 
 #items .item-body {
@@ -67,4 +71,12 @@ body {
 
 #detail h1 {
   margin: 10px;
+}
+
+#comments {
+  margin:10px;
+}
+
+#comments .comment-info {
+  margin-bottom: 5px;
 }

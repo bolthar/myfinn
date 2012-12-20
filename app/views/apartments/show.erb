@@ -1,8 +1,53 @@
 
 
 <div id="detail">
+  <input type="hidden" value="<%= @apartment.id %>" id="apartment-id" />
   <div class="container">
     <h1><%= @apartment.title %></h1>
-    <img src="<%= @apartment.image_src %>" class="image-polaroid" />
+    <ul id="tabcontrol" class="nav nav-tabs">
+      <li class="active"><a href="#general">General</a></li>
+      <li><a href="#description">Description</a></li>
+      <li><a href="#comments">Comments</a></li>
+    </ul>
+    <div class="tab-content" style="margin:20px;">
+      <div id="general" class="tab-pane active">
+        <div class="pull-left">
+          <img src="<%= @apartment.image_src %>" class="img-polaroid" />
+        </div>
+        <div class="pull-left" style="margin:20px;">
+          <table class="table table-striped">
+            <%= render :partial => "tableitem", :locals => { :label => "Rent", :value => @apartment.rent } %>
+            <%= render :partial => "tableitem", :locals => { :label => "Deposit", :value => @apartment.deposit } %>
+            <%= render :partial => "tableitem", :locals => { :label => "Size", :value => @apartment.size } %>
+            <%= render :partial => "tableitem", :locals => { :label => "Floor", :value => @apartment.floor } %>
+            <%= render :partial => "tableitem", :locals => { :label => "Start date", :value => @apartment.start_date ? @apartment.start_date.strftime("%d %b %Y") : nil } %>
+            <%= render :partial => "tableitem", :locals => { :label => "End date", :value => @apartment.end_date ? @apartment.end_date.strftime("%d %b %Y") : nil } %>
+          </table>
+        </div>
+        <div class="pull-left">
+          <h4>Features</h4>
+          <ul>
+            <% @apartment.features.each do |feature| %>
+              <li><%= feature.description %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+      <div id="description" class="tab-pane">
+          <%= raw @apartment.html_description %>
+      </div>
+      <div id="comments" class="tab-pane">
+        <div id="comments-container">
+        </div>
+        <div id="add-comment">
+          <textarea id="comment-textarea" rows="5" style="width:98.7%;"></textarea>
+          <div class="pull-right">
+            <span id="comment-add-error" style="color:#FF0000"></span>
+            <a href="#" class="btn" id="link-add-comment">Comment</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

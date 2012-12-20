@@ -2,6 +2,11 @@
 <div class="item-container">
   <div class="pull-left image-container">
     <img src="<%= apartment.image_src %>" class="img-polaroid image" />
+    <div class="user-info">
+      <span>Created <strong><%= apartment.created_at.strftime("%d %b %Y") %></strong> by <strong><%= apartment.user.name %></strong></span>
+      <br/>
+      <span><strong><%= apartment.comments.count %></strong> comment(s)</span>
+    </div>
   </div>
   <div class="item-body pull-left">
     <h3><%= link_to apartment.title, "/apartments/#{apartment.id}" %></h3>

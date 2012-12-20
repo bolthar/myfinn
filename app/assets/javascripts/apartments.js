@@ -1,4 +1,9 @@
 
+function refreshComments(apartment_id) {
+  $("#comments-container").load(
+      "/comments/" + apartment_id);
+}
+
 $(document).ready(function() {
 
   $("#search_finn").click(function () {
@@ -16,6 +21,32 @@ $(document).ready(function() {
         }
       }
     );
+  });
+
+  $("#tabcontrol a").click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
+  refreshComments($("#apartment-id").val());
+
+  $("#link-add-comment").click(function () {
+    $("#add-comment-error").html();
+    $("#link-add-comment").button('loading');
+    $.post("/comments/", 
+      {
+        apartment_id : $("#apartment-id").val(),
+        text : $("#comment-textarea").val()
+      },
+      function (result) {
+        if(result.status == "ok") {
+          $("#link-add-comment").button('reset');
+          refreshComments($("#apartment-id").val());
+        } else {
+          $("#add-comment-error").html(result.status);
+        }
+      });
+
   });
 
 });

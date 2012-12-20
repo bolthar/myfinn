@@ -1,0 +1,10 @@
+
+<div class="single-comment">
+  <div class="comment-info">
+    <span>by <strong><%= comment.user.name %></strong> at <strong><%= comment.created_at.strftime("%d %b %Y, %H.%M") %></strong><% if current_user == comment.user %> - <a href="#" class="comment-delete" data-id="<%= comment.id%>">delete comment</a><% end %></span>
+  </div>
+  <div class="comment-text well">
+    <span><%= comment.text %></span>
+  </div>
+  <hr />
+</div>
