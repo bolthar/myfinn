@@ -10,10 +10,10 @@ class ApartmentsController < ApplicationController
   def create
     finncode = params[:id].to_i
     apartment = Apartment.find_by_code(finncode)
-    apartment.user = current_user
     if !apartment
       apartment = Parser.new.parse(finncode)
       if !apartment.kind_of?(String)
+        apartment.user = current_user
         apartment.save
         render :json => { :status => "ok", :id => apartment.id }
       else
