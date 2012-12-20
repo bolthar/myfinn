@@ -47,5 +47,10 @@
       <a href="<%= apartment.finn_link %>">See on Finn.no</a>
     </div>
   </div>
+  <% if apartment.user == current_user %>
+    <div class="pull-right" style="margin-right:10px;margin-top:5px;">
+      <a href="/apartments/delete/<%= apartment.id %>"><i class="icon-remove-sign"></i></a>
+    </div>
+  <% end %>
 <div style="clear:both;"></div>
 </div>

@@ -7,8 +7,9 @@ Myfinn::Application.routes.draw do
   root :to => 'apartments#index'
 
   post 'apartments/create' => 'apartments#create'
-  match 'apartments/' => 'apartments#index'
+  get 'apartments/' => 'apartments#index'
   get 'apartments/:id' => 'apartments#show'
+  get 'apartments/delete/:id' => 'apartments#delete'
 
   get 'comments/:id' => 'comments#show'
   post 'comments' => 'comments#save'

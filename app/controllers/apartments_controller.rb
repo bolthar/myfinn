@@ -28,6 +28,12 @@ class ApartmentsController < ApplicationController
     @apartment = Apartment.find(params[:id].to_i)
   end
 
+  def delete
+    apartment = Apartment.find(params[:id].to_i)
+    apartment.destroy
+    redirect_to apartments_path
+  end
+
 end
 
 
