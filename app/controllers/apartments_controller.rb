@@ -4,7 +4,7 @@ class ApartmentsController < ApplicationController
   ALREADY_EXIST = "Insertion already imported"
 
   def index
-    @apartments = Apartment.all(:order => 'created_at DESC')
+    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC')
   end
 
   def create
