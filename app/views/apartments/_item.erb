@@ -10,6 +10,9 @@
   </div>
   <div class="item-body pull-left">
     <h3><%= link_to apartment.title, "/apartments/#{apartment.id}" %></h3>
+    <div class="rating">
+      <%= render :partial => "rating", :locals => { :apartment => apartment } %>
+    </div>
     <div class="item-data">
        <div class="pull-left">
          <strong>Rent: </strong>

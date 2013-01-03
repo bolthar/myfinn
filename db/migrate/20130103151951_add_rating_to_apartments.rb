@@ -1,7 +1,7 @@
 class AddRatingToApartments < ActiveRecord::Migration
 
   def up
-    add_column :apartments, :rating, :integer
+    add_column :apartments, :rating, :integer, :default => 0
   end
 
   def down

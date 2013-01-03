@@ -34,6 +34,14 @@ class ApartmentsController < ApplicationController
     redirect_to apartments_path
   end
 
+  def rating
+    rating = params[:value]
+    apartment = Apartment.find(params[:id].to_i)
+    apartment.rating = rating
+    apartment.save
+    render :json => { :result => "ok", :rating => apartment.rating }
+  end
+
 end
 
 

@@ -1,0 +1,6 @@
+
+<% if admin %>
+  <div data-rating="<%= point %>" data-apartment-id="<%= apartment.id %>" class="star <%= star_class %> pull-left changeable"></div>
+<% else %>
+  <div class="star <%= star_class %> pull-left"></div>
+<% end %>

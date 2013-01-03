@@ -4,8 +4,22 @@ function refreshComments(apartment_id) {
       "/comments/" + apartment_id);
 }
 
-$(document).ready(function() {
+function highlightStars(container, rating) {
+  container.find(".star").each(function () {
+    var star = $(this);
+    if(star.attr("data-rating") <= rating){
+      star.removeClass("no-point");
+      star.addClass("point");
+    } else { 
+      star.removeClass("point");
+      star.addClass("no-point");
+    }
+  });
+}
 
+$(document).ready(function() {
+ 
+  $(".rating .saved").hide();
   $("#search_finn").click(function () {
     var finn_id = $("#search_finn_id").val();
     $("#search_finn").button('loading');
@@ -47,6 +61,16 @@ $(document).ready(function() {
         }
       });
 
+  });
+
+  $(".rating .changeable").click(function () {
+    var apt_id = $(this).attr("data-apartment-id");
+    var rating = $(this).attr("data-rating");
+    var container = $(this).parent();
+    $.post("/apartments/" + apt_id + "/rating", { value : rating }, function (result) {
+      highlightStars(container, result.rating);
+      container.find(".saved").show('fast');
+    });
   });
 
 });

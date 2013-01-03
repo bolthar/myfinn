@@ -1,0 +1,7 @@
+
+<% (1..5).each do |star| %>
+  <%= render :partial => "star", :locals => { :point => star, :admin => current_user.admin, :star_class => apartment.rating >= star ? "point" : "no-point", :apartment => apartment } %>
+<% end %>
+<span class="saved" style="color:green; margin-left:5px;">Saved!</span>
+<div style="clear:both;" ></div>
+

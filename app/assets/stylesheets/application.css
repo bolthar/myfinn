@@ -82,3 +82,20 @@ body {
 #comments .comment-info {
   margin-bottom: 5px;
 }
+
+.rating .star {
+  height: 24px;
+  width: 24px;
+}
+
+.rating .point {
+  background-image: url('/assets/star.png');
+}
+
+.rating .no-point {
+  background-image: url('/assets/star_white.png');
+}
+
+.rating .changeable {
+  cursor: pointer;
+}
