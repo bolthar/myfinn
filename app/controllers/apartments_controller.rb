@@ -35,6 +35,7 @@ class ApartmentsController < ApplicationController
   end
 
   def rating
+    return unless current_user.admin
     rating = params[:value]
     apartment = Apartment.find(params[:id].to_i)
     apartment.rating = rating
