@@ -7,6 +7,7 @@
     <ul id="tabcontrol" class="nav nav-tabs">
       <li class="active"><a href="#general">General</a></li>
       <li><a href="#description">Description</a></li>
+      <li><a href="#contact-infos">Contact info</a></li>
       <li><a href="#comments">Comments</a></li>
     </ul>
     <div class="tab-content" style="margin:20px;">
@@ -36,6 +37,16 @@
       </div>
       <div id="description" class="tab-pane">
           <%= raw @apartment.html_description %>
+      </div>
+      <div id="contact-infos" class="tab-pane">
+        <table class="table">
+          <% @apartment.contact_infos.each do |info| %>
+            <tr>
+              <td style="font-weight:bold;"><%= info.type %></td>
+              <td><%= info.value %></td>
+            </tr>
+          <% end %>
+        </table>
       </div>
       <div id="comments" class="tab-pane">
         <div id="comments-container">

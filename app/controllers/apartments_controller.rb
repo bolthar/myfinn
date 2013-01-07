@@ -26,6 +26,7 @@ class ApartmentsController < ApplicationController
 
   def show
     @apartment = Apartment.find(params[:id].to_i)
+    @title = "#{@apartment.title} - #{SITE_NAME}"
   end
 
   def delete
