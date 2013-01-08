@@ -72,9 +72,12 @@ class Parser
   def update_locations
     agent = Mechanize.new
     Apartment.all.each do |apt|
-      page = agent.get("#{BASE_PATH}#{apt.code}")
-      apt.location = page.search(".map-track").first.inner_html
       p apt.title
+      page = agent.get("#{BASE_PATH}#{apt.code}")
+      element = page.search(".map-track").first
+      if element && element.inner_html != ""
+        apt.location = element.inner_html
+      end
       apt.save
     end
 
