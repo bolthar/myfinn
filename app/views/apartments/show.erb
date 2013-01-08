@@ -6,6 +6,7 @@
     <h1><%= @apartment.title %></h1>
     <ul id="tabcontrol" class="nav nav-tabs">
       <li class="active"><a href="#general">General</a></li>
+      <li><a href="#appointment">Appointment</a></li>
       <li><a href="#description">Description</a></li>
       <li><a href="#contact-infos">Contact info</a></li>
       <li><a href="#comments">Comments</a></li>
@@ -34,6 +35,9 @@
           </ul>
         </div>
         <div style="clear:both;"></div>
+      </div>
+      <div id="appointment">
+        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng } %>
       </div>
       <div id="description" class="tab-pane">
           <%= raw @apartment.html_description %>
