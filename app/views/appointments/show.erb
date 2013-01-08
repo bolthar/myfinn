@@ -1,0 +1,61 @@
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#saved-appointment").hide();
+        $("#error-appointment").hide();
+        $("#appointment-date").datepicker({ format : "dd/mm/yyyy" }).on('changeDate', function (dt) {
+          $("#appointment-date").datepicker("hide");
+        });
+        $("#appointment-time").timepicker({ showMeridian : false, minuteStep : 5 });
+    });
+
+    $("#save-appointment").unbind("click");
+    $("#save-appointment").click(function () {
+        $("#saved-appointment").hide();
+        $("#error-appointment").hide();
+        data = {
+          date : $("#appointment-date").val(),
+          time : $("#appointment-time").val(),
+          person : $("#appointment-person").val(),
+          notes : $("#appointment-notes").val()
+        };
+        $.post("/appointments/" + <%= @appointment.id %>, data, function (result) {
+          if(result.status == "ok") {
+            $("#saved-appointment").show('fast');
+          } else {
+            $("#error-appointment").show('fast');
+          }
+        });
+    });
+
+</script>
+
+<div style="margin-left:15px;">
+  <input type="hidden" id="apartment_id" value="<%= @appointment.apartment.id %>" />
+  <form>
+    <fieldlist>
+      <div id="appointment-data">
+        <div>
+          <label for="appointment-date">Date: </label>
+          <input type="text" id="appointment-date" value="<%= @appointment.date %>" />
+        </div>
+        <div>
+          <label for="appointment-time">Time: </label>
+          <input type="text" id="appointment-time" value="<%= @appointment.time %>"/>
+        </div>
+        <div>
+          <label for="appointment-person">Reference person: </label>
+          <input type="text" id="appointment-person" value="<%= @appointment.reference_person %>" />
+        </div>
+        <div>
+          <label for="appointment-notes">Notes: </label>
+          <textarea rows="2" id="appointment-notes"><%= @appointment.notes %></textarea>
+        </div>
+      </div>
+    </fieldlist>
+  </form>
+  <a id="save-appointment" class="btn">Save</a>
+  <span id="saved-appointment" style="color:green;">Saved!</span>
+  <span id="error-appointment" style="color:red;">Error during save</span>
+</div>

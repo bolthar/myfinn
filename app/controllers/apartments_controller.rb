@@ -44,6 +44,20 @@ class ApartmentsController < ApplicationController
     render :json => { :result => "ok", :rating => apartment.rating }
   end
 
+  def contact
+    apartment = Apartment.find(params[:id].to_i)
+    apartment.contacted = params[:value]
+    apartment.save
+    render :json => { :result => "ok" }
+  end
+
+  def reject
+    apartment = Apartment.find(params[:id].to_i)
+    apartment.rejected = params[:value]
+    apartment.save
+    render :json => { :result => "ok" }
+  end
+
 end
 
 

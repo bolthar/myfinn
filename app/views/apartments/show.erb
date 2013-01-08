@@ -34,10 +34,21 @@
             <% end %>
           </ul>
         </div>
+        <div class="pull-left">
+          <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng } %>
+        </div>
         <div style="clear:both;"></div>
       </div>
-      <div id="appointment">
-        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng } %>
+      <div id="appointment" class="tab-pane">
+        <label class="checkbox">
+          <input type="checkbox" id="apartment-contacted" <%= @apartment.contacted ? "checked='checked'" : "" %> />
+          Contacted?
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="apartment-rejected" <%= @apartment.rejected ? "checked='checked'" : "" %> />
+          Rejected?
+        </label>
+        <div id="appointment-container"></div>
       </div>
       <div id="description" class="tab-pane">
           <%= raw @apartment.html_description %>

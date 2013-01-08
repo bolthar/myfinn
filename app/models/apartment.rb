@@ -6,6 +6,7 @@ class Apartment < ActiveRecord::Base
   has_many :comments
 
   belongs_to :user
+  has_one :appointment
 
   def finn_link
     return "#{Parser.base_path}#{self.code}"

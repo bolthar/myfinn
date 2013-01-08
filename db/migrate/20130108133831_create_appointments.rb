@@ -3,7 +3,7 @@ class CreateAppointments < ActiveRecord::Migration
   def up
     create_table :appointments do |t|
       t.references :apartment
-      t.datetime :time
+      t.datetime :datetime
       t.string :reference_person
       t.text :notes
     end

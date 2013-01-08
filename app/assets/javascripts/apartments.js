@@ -17,6 +17,24 @@ function highlightStars(container, rating) {
   });
 }
 
+function showAppointmentSection(apartment_id) {
+  var contacted = $("#apartment-contacted").attr("checked");
+  var rejected = $("#apartment-rejected").attr("checked");
+  if(contacted && !rejected) {
+    $("#appointment-container").load("/apartments/" + apartment_id + "/appointment");
+  } else {
+    $("#appointment-container").html("");
+  }
+}
+
+function sendCheckedData(apartment_id, method, trueOrFalse) 
+{
+  $.post("/apartments/" + apartment_id + "/" + method, { value: trueOrFalse }, function() {
+    showAppointmentSection(apartment_id);
+  });
+
+}
+
 $(document).ready(function() {
  
   $(".rating .saved").hide();
@@ -43,6 +61,16 @@ $(document).ready(function() {
   });
 
   refreshComments($("#apartment-id").val());
+
+  $("#apartment-contacted").click(function () {
+    sendCheckedData($("#apartment-id").val(), "contact", $(this).attr("checked") == "checked");
+  });
+
+  $("#apartment-reject").click(function () {
+    sendCheckedData($("#apartment-id").val(), "reject", $(this).attr("checked") == "checked");
+  });
+
+  showAppointmentSection($("#apartment-id").val())
 
   $("#link-add-comment").click(function () {
     $("#add-comment-error").html();
@@ -72,6 +100,11 @@ $(document).ready(function() {
       container.find(".saved").show('fast');
     });
   });
+
+  $("#appointment_date").datepicker({ format : "dd/mm/yyyy" }).on('changeDate', function(e) {
+    $("#appointment_date").datepicker('hide');
+  });
+  $("#appointment_time").timepicker({ showMeridian: false, minuteStep: 5});
 
 });
 
