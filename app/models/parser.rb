@@ -73,6 +73,7 @@ class Parser
     Apartment.all.each do |apt|
       page = agent.get("#{BASE_PATH}#{apt.code}")
       apt.location = page.search(".map-track").first.inner_html
+      p apt.title
       apt.save
     end
 
