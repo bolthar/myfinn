@@ -37,6 +37,8 @@ class Parser
       sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruksareal")]
       apartment.size = sizes.select { |x| x != "" }.first 
       apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
+      p page.search(".map-track").first.inner_html
+      apartment.location = page.search(".map-track").first.inner_html
       dates = get_value_of(house_info, "Leieperiode")
       if dates != ""
         if dates =~ /\-/
@@ -64,6 +66,7 @@ class Parser
       apartment.code = finn_id
       return apartment
     rescue Exception => ex
+      p ex.message
       return PARSE_ERROR
     end
   end
@@ -78,7 +81,9 @@ class Parser
     labels = dtable.search('dt')
     values = dtable.search('dd')
     labels.zip(values).each do |pair|
-      result << { pair[0].inner_text => pair[1].content.strip.split("\r\n").first.strip }
+      if pair && pair[0] && pair[1]
+        result << { pair[0].inner_text => pair[1].content.strip.split("\r\n").first.strip }
+      end
     end
   end
 
@@ -86,7 +91,7 @@ class Parser
     result = []
     target = page.search('#brokerContact-0').first
       if target 
-        target.search('dl.multicol').each do |element|
+        target.search('dl').each do |element|
           extract_from_dtable(result, element)
         end
       end

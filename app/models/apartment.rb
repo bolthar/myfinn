@@ -11,4 +11,11 @@ class Apartment < ActiveRecord::Base
     return "#{Parser.base_path}#{self.code}"
   end
 
+  def location=(value)
+    write_attribute(:location, value)
+    position = Geocoder.coordinates(value)
+    self.lat = position[0].to_d
+    self.lng = position[1].to_d
+  end
+
 end
