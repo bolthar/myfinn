@@ -37,7 +37,6 @@ class Parser
       sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruksareal")]
       apartment.size = sizes.select { |x| x != "" }.first 
       apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
-      p page.search(".map-track").first.inner_html
       apartment.location = page.search(".map-track").first.inner_html
       dates = get_value_of(house_info, "Leieperiode")
       if dates != ""
@@ -66,9 +65,17 @@ class Parser
       apartment.code = finn_id
       return apartment
     rescue Exception => ex
-      p ex.message
       return PARSE_ERROR
     end
+  end
+
+  def update_locations
+    Apartments.all.each do |apt|
+      page = agent.get("#{BASE_PATH}#{apt.code}")
+      apt.location = page.search(".map-track").first.inner_html
+      apt.save
+    end
+
   end
 
   private 
