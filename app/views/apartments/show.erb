@@ -38,7 +38,7 @@
         <div style="clear:both;"></div>
       </div>
       <div id="map" class="tab-pane">
-        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng } %>
+        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng, :address => @apartment.location } %>
       </div>
       <div id="appointment" class="tab-pane">
         <label class="checkbox">

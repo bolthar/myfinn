@@ -4,11 +4,13 @@ class Appointment < ActiveRecord::Base
   belongs_to :apartment
 
   def date
-    self.datetime.strftime("%d/%m/%Y")
+    return "" unless self.datetime
+    return self.datetime.strftime("%d/%m/%Y")
   end
 
   def time
-    self.datetime.strftime("%H:%M")
+    return "" unless self.datetime
+    return self.datetime.strftime("%H:%M")
   end
 
 end
