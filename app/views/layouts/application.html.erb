@@ -7,11 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body style="background:#eee">
-
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="#">MyFinn</a>
+        <a class="brand" href="/">MyFinn</a>
         <% if current_user %>
           <ul class="nav">
             <li><%= link_to "Apartments", apartments_path %></li>
