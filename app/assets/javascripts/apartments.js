@@ -57,10 +57,10 @@ $(document).ready(function() {
 
   $("#tabcontrol a").click(function (e) {
     e.preventDefault();
+    $(this).tab('show');
     if($(this).attr("href") == "#map") {
       drawMap(); //hackhackhack!
     }
-    $(this).tab('show');
   });
 
   refreshComments($("#apartment-id").val());

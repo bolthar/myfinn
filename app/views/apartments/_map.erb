@@ -4,7 +4,13 @@
 
 <script type="text/javascript">
 
-  function drawMap(){
+  var map;
+
+  $(document).ready(function () {
+      createMap();
+  });
+
+  function createMap(){
       var latLng =  new google.maps.LatLng(<%= lat %>,<%= lng %>);
       var mapOptions = {
         center: latLng,
@@ -18,6 +24,11 @@
         icon: '/assets/mapicon.png'
       });
   }
+
+  function drawMap() {
+    google.maps.event.trigger(map, 'resize');
+    map.setZoom(map.getZoom());
+  };
 
 </script>
 
