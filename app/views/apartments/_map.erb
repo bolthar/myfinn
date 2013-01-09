@@ -6,10 +6,6 @@
 
   var map;
 
-  $(document).ready(function () {
-      createMap();
-  });
-
   function createMap(){
       var latLng =  new google.maps.LatLng(<%= lat %>,<%= lng %>);
       var mapOptions = {
@@ -26,8 +22,10 @@
   }
 
   function drawMap() {
+    if(map == null) {
+      createMap();
+    }
     google.maps.event.trigger(map, 'resize');
-    map.setZoom(map.getZoom());
   };
 
 </script>
