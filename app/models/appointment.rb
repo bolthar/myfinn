@@ -13,4 +13,19 @@ class Appointment < ActiveRecord::Base
     return self.datetime.strftime("%H:%M")
   end
 
+  def to_calendar_event
+    return { 
+      :id => self.id, 
+      :title => self.apartment.title, 
+      :start => "#{self.datetime.strftime("%Y/%m/%d")} #{self.time}", 
+      :allDay => false
+    }
+  end
+
+  def self.valid
+    self
+      .where("datetime is not null AND apartment_id is not null")
+      .select { |x| x.apartment && x.apartment.contacted && !x.apartment.rejected }
+  end
+
 end
