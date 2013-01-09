@@ -21,9 +21,7 @@ function showAppointmentSection(apartment_id) {
   var contacted = $("#apartment-contacted").attr("checked");
   var rejected = $("#apartment-rejected").attr("checked");
   if(contacted && !rejected) {
-    alert("here");
     $("#appointment-container").load("/apartments/" + apartment_id + "/appointment");
-    alert("there");
   } else {
     $("#appointment-container").html("");
   }
