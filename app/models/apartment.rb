@@ -1,4 +1,6 @@
 
+#encoding: UTF-8
+
 class Apartment < ActiveRecord::Base
  
   has_many :contact_infos
@@ -13,8 +15,9 @@ class Apartment < ActiveRecord::Base
   end
 
   def location=(value)
-    write_attribute(:location, value)
-    position = Geocoder.coordinates(value)
+    value_utf = value.encode("UTF-8")
+    write_attribute(:location, value_utf)
+    position = Geocoder.coordinates(value_utf)
     self.lat = position[0].to_d
     self.lng = position[1].to_d
   end
