@@ -4,24 +4,21 @@
 
 <script type="text/javascript">
 
-  $(document).ready(function() {
+  function drawMap(){
       var latLng =  new google.maps.LatLng(<%= lat %>,<%= lng %>);
       var mapOptions = {
         center: latLng,
         zoom: 13,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        mapTypeControlOptions: { 
-          mapTypeIds: []
-        }
       };
-      var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+      map = new google.maps.Map(document.getElementById("map-container"), mapOptions);
       var marker = new google.maps.Marker({
         position: latLng,
         map: map,
         icon: '/assets/mapicon.png'
       });
-  });
+  }
 
 </script>
 
-<div id="map" style="width:500px;height:400px;"></div>
+<div id="map-container" style="width:800px;height:500px;margin-left:auto;margin-right:auto;"></div>

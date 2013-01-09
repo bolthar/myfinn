@@ -57,6 +57,9 @@ $(document).ready(function() {
 
   $("#tabcontrol a").click(function (e) {
     e.preventDefault();
+    if($(this).attr("href") == "#map") {
+      drawMap(); //hackhackhack!
+    }
     $(this).tab('show');
   });
 
