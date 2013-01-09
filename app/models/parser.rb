@@ -75,8 +75,12 @@ class Parser
       p apt.title
       page = agent.get("#{BASE_PATH}#{apt.code}")
       element = page.search(".map-track").first
-      if element && !element.empty? && element.inner_html != ""
+      if element && element.inner_html != ""
+        begin
         apt.location = element.inner_html
+        rescue Exception => ex
+          p ex.message
+        end
       end
       apt.save
     end
