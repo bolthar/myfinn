@@ -11,8 +11,7 @@ Myfinn::Application.routes.draw do
   get 'apartments/:id' => 'apartments#show'
   get 'apartments/delete/:id' => 'apartments#delete'
   post 'apartments/:id/rating' => 'apartments#rating'
-  post 'apartments/:id/contact' => 'apartments#contact'
-  post 'apartments/:id/reject' => 'apartments#reject'
+  post 'apartments/:id/status' => 'apartments#status'
 
   get 'apartments/:id/appointment' => 'appointments#show'
   post 'appointments/:id' => 'appointments#update'

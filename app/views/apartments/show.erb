@@ -41,14 +41,16 @@
         <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng, :address => @apartment.location } %>
       </div>
       <div id="appointment" class="tab-pane">
-        <label class="checkbox">
-          <input type="checkbox" id="apartment-contacted" <%= @apartment.contacted ? "checked='checked'" : "" %> />
-          Contacted?
-        </label>
-        <label class="checkbox">
-          <input type="checkbox" id="apartment-rejected" <%= @apartment.rejected ? "checked='checked'" : "" %> />
-          Rejected?
-        </label>
+        <select id="change-status">
+          <% options = { 0 => "New", 1 => "Contacted", 2 => "Replied", 3 => "Appointment", 4 => "Rejected" } %>
+          <% options.each do |k, v| %>
+            <% if k == @apartment.status %>
+              <option value="<%= k %>" selected><%= v %></option>
+            <% else %>
+              <option value="<%= k %>"><%= v %></option>
+            <% end %>
+          <% end %>
+        </select>
         <div id="appointment-container"></div>
       </div>
       <div id="description" class="tab-pane">

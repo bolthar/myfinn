@@ -18,18 +18,16 @@ function highlightStars(container, rating) {
 }
 
 function showAppointmentSection(apartment_id) {
-  var contacted = $("#apartment-contacted").attr("checked");
-  var rejected = $("#apartment-rejected").attr("checked");
-  if(contacted && !rejected) {
+  if($("#change-status").val() == "3") {
     $("#appointment-container").load("/apartments/" + apartment_id + "/appointment");
   } else {
     $("#appointment-container").html("");
   }
 }
 
-function sendCheckedData(apartment_id, method, trueOrFalse) 
+function sendCheckedData(apartment_id, statusValue) 
 {
-  $.post("/apartments/" + apartment_id + "/" + method, { value: trueOrFalse }, function() {
+  $.post("/apartments/" + apartment_id + "/status", { value: statusValue }, function() {
     showAppointmentSection(apartment_id);
   });
 
@@ -65,12 +63,8 @@ $(document).ready(function() {
 
   refreshComments($("#apartment-id").val());
 
-  $("#apartment-contacted").click(function () {
-    sendCheckedData($("#apartment-id").val(), "contact", $(this).attr("checked") == "checked");
-  });
-
-  $("#apartment-rejected").click(function () {
-    sendCheckedData($("#apartment-id").val(), "reject", $(this).attr("checked") == "checked");
+  $("#change-status").change(function () {
+    sendCheckedData($("#apartment-id").val(), "contact", $(this).val());
   });
 
   showAppointmentSection($("#apartment-id").val())
