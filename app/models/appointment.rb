@@ -25,7 +25,7 @@ class Appointment < ActiveRecord::Base
   def self.valid
     self
       .where("datetime is not null AND apartment_id is not null")
-      .select { |x| x.apartment && x.apartment.contacted && !x.apartment.rejected }
+      .select { |x| x.apartment && x.apartment.status == 3 } #ugly...
   end
 
 end
