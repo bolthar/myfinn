@@ -15,7 +15,7 @@ class Appointment < ActiveRecord::Base
 
   def to_calendar_event
     return { 
-      :id => self.id, 
+      :id => self.apartment.id, 
       :title => self.apartment.title, 
       :start => "#{self.datetime.strftime("%Y/%m/%d")} #{self.time}", 
       :allDay => false

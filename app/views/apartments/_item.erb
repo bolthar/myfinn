@@ -11,7 +11,13 @@
   <div class="item-body pull-left">
     <h3><%= link_to apartment.title, "/apartments/#{apartment.id}" %></h3>
     <div class="rating">
-      <%= render :partial => "rating", :locals => { :apartment => apartment } %>
+      <div class="pull-left">
+        <%= render :partial => "rating", :locals => { :apartment => apartment } %>
+      </div>
+      <div class="pull-left" style="margin-left:20px;">
+        <img src="/assets/status<%= apartment.status %>.png" />
+      </div>
+      <div style="clear:both;"></div>
     </div>
     <div class="item-data">
        <div class="pull-left">

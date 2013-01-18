@@ -7,6 +7,9 @@ $(document).ready(function () {
       center: 'title',
       right: 'month, agendaWeek, agendaDay'
     },
-    events: "/calendar/events"
+    events: "/calendar/events",
+    eventClick: function(ev) {
+      window.location.href = "/apartments/" + ev.id;
+    }
   });
 });

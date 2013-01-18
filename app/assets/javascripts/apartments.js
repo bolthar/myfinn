@@ -64,7 +64,7 @@ $(document).ready(function() {
   refreshComments($("#apartment-id").val());
 
   $("#change-status").change(function () {
-    sendCheckedData($("#apartment-id").val(), "contact", $(this).val());
+    sendCheckedData($("#apartment-id").val(), $(this).val());
   });
 
   showAppointmentSection($("#apartment-id").val())

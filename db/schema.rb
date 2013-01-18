@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118163115) do
+ActiveRecord::Schema.define(:version => 20130118165325) do
 
   create_table "apartments", :force => true do |t|
     t.string   "title"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(:version => 20130118163115) do
     t.string   "location"
     t.float    "lat"
     t.float    "lng"
-    t.boolean  "contacted",        :default => false
-    t.boolean  "rejected",         :default => false
     t.integer  "status",           :default => 0
   end
 
