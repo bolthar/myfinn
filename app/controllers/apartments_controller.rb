@@ -4,7 +4,8 @@ class ApartmentsController < ApplicationController
   ALREADY_EXIST = "Insertion already imported"
 
   def index
-    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC')
+    @filter = params[:status] ? params[:status].to_i : 3
+    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC', :conditions => "status <= #{@filter}")
   end
 
   def create

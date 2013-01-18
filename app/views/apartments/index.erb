@@ -1,5 +1,19 @@
 
+<script type="text/javascript">
+
+  $(document).ready(function () {
+
+      $("#status_filter").change(function () {
+        window.location.href = "/?status=" + $("#status_filter").val();
+      });
+
+  });
+
+</script>
 <div id="items">
+  <div style="margin-top:10px;">
+    <%= render :partial => "status", :locals => { :select_id => "status_filter", :status => @filter, :label => "See all at least:" } %>
+  </div>
   <% @apartments.each do |apt| %>
     <%= render :partial => "item", :locals => { :apartment => apt } %>
   <% end %>
