@@ -1,0 +1,9 @@
+
+defaults: &defaults
+  google_maps_key: <YOUR_GOOGLE_API_KEY>
+
+development:
+  <<: *defaults
+
+production:
+  <<: *defaults
