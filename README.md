@@ -36,6 +36,7 @@ You can connect to
 to see a live demo. To access the demo site:
 
 As an admin user: email - admin@myfinn.com, password - adminpass
+
 As a normal user: email - user@myfinn.com, password - userpass
 
 Cool. What now?
