@@ -4,10 +4,10 @@
     $(document).ready(function () {
         $("#saved-appointment").hide();
         $("#error-appointment").hide();
-        $("#appointment-date").datepicker({ format : "dd/mm/yyyy" }).on('changeDate', function (dt) {
+        $("#appointment-date").datepicker({ format: "dd/mm/yyyy" }).on('changeDate', function (dt) {
           $("#appointment-date").datepicker("hide");
         });
-        $("#appointment-time").timepicker({ showMeridian : false, minuteStep : 5 });
+        $("#appointment-time").timepicker({ showMeridian: false, minuteStep: 5, defaultTime: 'value' });
     });
 
     $("#save-appointment").unbind("click");
