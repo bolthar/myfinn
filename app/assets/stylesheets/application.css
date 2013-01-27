@@ -99,3 +99,17 @@ body {
 .rating .changeable {
   cursor: pointer;
 }
+
+#map #map-container {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+}
+
+#calendar {
+  margin:10px;
+  padding:10px;
+  border-radius:10px;
+  background-color:#f7f7f7;
+  border: 1px solid black;
+}

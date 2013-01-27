@@ -1,0 +1,12 @@
+
+<label for="<%= select_id %>"><%= label %></label>
+<select id="<%= select_id %>">
+  <% options = { 0 => "New", 1 => "Contacted", 2 => "Replied", 3 => "Appointment", 4 => "Rejected" } %>
+  <% options.each do |k, v| %>
+    <% if k == status %>
+      <option value="<%= k %>" selected><%= v %></option>
+    <% else %>
+      <option value="<%= k %>"><%= v %></option>
+    <% end %>
+  <% end %>
+</select>

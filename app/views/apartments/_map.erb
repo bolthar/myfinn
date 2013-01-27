@@ -1,0 +1,36 @@
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.config.google_maps_key %>&sensor=false">
+</script>
+
+<script type="text/javascript">
+
+  var map;
+
+  function createMap(){
+      var latLng =  new google.maps.LatLng(<%= lat %>,<%= lng %>);
+      var mapOptions = {
+        center: latLng,
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+      map = new google.maps.Map(document.getElementById("map-container"), mapOptions);
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        icon: '/assets/mapicon.png'
+      });
+  }
+
+  function drawMap() {
+    if(map == null) {
+      createMap();
+    }
+    google.maps.event.trigger(map, 'resize');
+  };
+
+</script>
+
+<div>
+  <h3><%= address %></h3>
+  <div id="map-container"></div>
+</div>

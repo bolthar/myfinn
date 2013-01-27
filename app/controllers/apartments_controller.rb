@@ -4,7 +4,8 @@ class ApartmentsController < ApplicationController
   ALREADY_EXIST = "Insertion already imported"
 
   def index
-    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC')
+    @filter = params[:status] ? params[:status].to_i : 3
+    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC', :conditions => "status <= #{@filter}")
   end
 
   def create
@@ -42,6 +43,14 @@ class ApartmentsController < ApplicationController
     apartment.rating = rating
     apartment.save
     render :json => { :result => "ok", :rating => apartment.rating }
+  end
+
+  def status
+    return unless current_user.admin
+    apartment = Apartment.find(params[:id].to_i)
+    apartment.status = params[:value].to_i
+    apartment.save
+    render :json => { :result => "ok" }
   end
 
 end

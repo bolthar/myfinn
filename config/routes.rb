@@ -11,10 +11,17 @@ Myfinn::Application.routes.draw do
   get 'apartments/:id' => 'apartments#show'
   get 'apartments/delete/:id' => 'apartments#delete'
   post 'apartments/:id/rating' => 'apartments#rating'
+  post 'apartments/:id/status' => 'apartments#status'
+
+  get 'apartments/:id/appointment' => 'appointments#show'
+  post 'appointments/:id' => 'appointments#update'
 
   get 'comments/:id' => 'comments#show'
   post 'comments' => 'comments#save'
   post 'comments/delete' => 'comments#delete'
+
+  get 'calendar/' => 'calendar#index'
+  get 'calendar/events' => 'calendar#events'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

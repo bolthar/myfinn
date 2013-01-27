@@ -1,4 +1,4 @@
-#encoding: utf-8
+#encoding: UTF-8
 require 'mechanize'
 require 'date'
 require_relative 'apartment.rb'
@@ -37,6 +37,7 @@ class Parser
       sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruksareal")]
       apartment.size = sizes.select { |x| x != "" }.first 
       apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
+      apartment.location = page.search(".map-track").first.inner_html
       dates = get_value_of(house_info, "Leieperiode")
       if dates != ""
         if dates =~ /\-/
@@ -68,6 +69,24 @@ class Parser
     end
   end
 
+  def update_locations
+    agent = Mechanize.new
+    Apartment.all.each do |apt|
+      p apt.title
+      page = agent.get("#{BASE_PATH}#{apt.code}")
+      element = page.search(".map-track").first
+      if element && element.inner_html != ""
+        begin
+        apt.location = element.inner_html
+        rescue Exception => ex
+          p ex.message
+        end
+      end
+      apt.save
+    end
+
+  end
+
   private 
   def get_value_of(values, target)
     value = values.select { |x| x[target] }.first
@@ -78,7 +97,9 @@ class Parser
     labels = dtable.search('dt')
     values = dtable.search('dd')
     labels.zip(values).each do |pair|
-      result << { pair[0].inner_text => pair[1].content.strip.split("\r\n").first.strip }
+      if pair && pair[0] && pair[1]
+        result << { pair[0].inner_text => pair[1].content.strip.split("\r\n").first.strip }
+      end
     end
   end
 
@@ -86,7 +107,7 @@ class Parser
     result = []
     target = page.search('#brokerContact-0').first
       if target 
-        target.search('dl.multicol').each do |element|
+        target.search('dl').each do |element|
           extract_from_dtable(result, element)
         end
       end
