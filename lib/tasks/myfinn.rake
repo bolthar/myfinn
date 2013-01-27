@@ -12,10 +12,9 @@ namespace :myfinn do
   end
 
   def create_user(is_admin)
-    name  = ENV['name'].clone
-    p name
-    email = ENV['email'].clone
-    pass  = ENV['password'].clone
+    name  = ENV['name'].dup
+    email = ENV['email'].dup
+    pass  = ENV['password'].dup
     user  = User.new
     user.name = name
     user.email = email
