@@ -1,4 +1,3 @@
-
 class CommentsController < ApplicationController
 
   def show
@@ -19,9 +18,7 @@ class CommentsController < ApplicationController
   end
 
   def delete
-    p "HERE"
     comment = Comment.find(params[:id].to_i)
-    p comment
     comment.destroy
     render :json => { :status => :ok }
   end
