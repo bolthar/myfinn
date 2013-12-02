@@ -64,6 +64,10 @@ module Myfinn
     config.google_maps_key = config_file['google_maps_key']
     config.insertion_filter_url = config_file['insertion_filter_url']
     config.insertion_notification_threshold = config_file['insertion_notification_threshold'].to_i
+    config.twilio_account_sid = config_file['twilio_account_sid']
+    config.twilio_auth_token = config_file['twilio_auth_token']
+    config.twilio_source_number = config_file['twilio_source_number']
+    config.twilio_target_number = config_file['twilio_target_number']
 
   end
 end

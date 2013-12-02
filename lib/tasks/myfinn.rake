@@ -25,9 +25,9 @@ namespace :myfinn do
   end
 
   task :notify => :environment do
-    not_notified = Insertion.where("notified = false")
+    not_notified = Insertion.where("notified = ?", false)
     if(not_notified.count >= Rails.application.config.insertion_notification_threshold)
-      notify_new_insertions(not_notified.count)
+      notify_new_insertions(not_notified)
       not_notified.each do |ins|
         ins.notified = true
         ins.save
@@ -43,16 +43,17 @@ namespace :myfinn do
     to_no = Rails.application.config.twilio_target_number
 
     no_of_insertions = insertions.count
-    max_insertion_size = insertions.max { |x| x.size }
-    min_insertion_size = insertions.max { |x| x.size }
-    max_insertion_price = insertions.min { |x| x.price }
-    min_insertion_price = insertions.max { |x| x.price }
+    apartments = insertions.map { |x| x.apartment }
+    max_insertion_size = apartments.map { |x| x.size.split("m").first.to_i }.max
+    min_insertion_size = apartments.map { |x| x.size.split("m").first.to_i }.min
+    max_insertion_price = apartments.map { |x| x.rent }.max
+    min_insertion_price = apartments.map { |x| x.rent }.min
 
     message = "MyFinn watcher - #{no_of_insertions} new insertions of interests, from #{min_insertion_size} to #{max_insertion_size} m2, from #{min_insertion_price} to #{max_insertion_price} NOK"
       
     client = Twilio::REST::Client.new(account_sid, auth_token)
     account = client.account
-    account.sms.messages.create({:from => from_no, :to => to_no, :body => 'Test message'})
+    account.sms.messages.create({:from => from_no, :to => to_no, :body => message})
   end
 
   def create_user(is_admin)
