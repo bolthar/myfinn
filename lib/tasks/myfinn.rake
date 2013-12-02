@@ -35,9 +35,24 @@ namespace :myfinn do
     end
   end
 
-  def notify_new_insertions(no_of_insertions)
-    p "notifiying..."
+  def notify_new_insertions(insertions)
     #twilio
+    account_sid = Rails.application.config.twilio_account_sid
+    auth_token = Rails.application.config.twilio_auth_token
+    from_no = Rails.application.config.twilio_source_number
+    to_no = Rails.application.config.twilio_target_number
+
+    no_of_insertions = insertions.count
+    max_insertion_size = insertions.max { |x| x.size }
+    min_insertion_size = insertions.max { |x| x.size }
+    max_insertion_price = insertions.min { |x| x.price }
+    min_insertion_price = insertions.max { |x| x.price }
+
+    message = "MyFinn watcher - #{no_of_insertions} new insertions of interests, from #{min_insertion_size} to #{max_insertion_size} m2, from #{min_insertion_price} to #{max_insertion_price} NOK"
+      
+    client = Twilio::REST::Client.new(account_sid, auth_token)
+    account = client.account
+    account.sms.messages.create({:from => from_no, :to => to_no, :body => 'Test message'})
   end
 
   def create_user(is_admin)

@@ -3,6 +3,10 @@ defaults: &defaults
   google_maps_key: <YOUR_GOOGLE_API_KEY>
   insertion_filter_url: <YOUR FINN QUERY HERE, EXAMPLE - http://www.finn.no/finn/realestate/lettings/result?PRICE_FROM=&sort=1&ESTATE_SIZE/LIVING_AREA_FROM=75&areaId=20061&PRICE_TO=17000&ESTATE_SIZE/LIVING_AREA_TO=&NUMBER_OF_BEDROOMS_FROM=2&NUMBER_OF_BEDROOMS_TO=2>
   insertion_notification_threshold: 5
+  twilio_account_sid = <YOUR_TWILIO_ACCOUNT_SID>
+  twilio_auth_token = <YOUR_TWILIO_ACCOUNT_TOKEN>
+  twilio_source_number = <YOUR_TWILIO_SOURCE_NUMBER, WITH COUNTRY CODE>
+  twilio_target_number = <YOUR_TWILIO_TARGET_NUMBER, WITH COUNTRY CODE>
 
 development:
   <<: *defaults
