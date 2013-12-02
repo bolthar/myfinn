@@ -7,6 +7,10 @@ Myfinn::Application.routes.draw do
   root :to => 'insertions#index'
 
   get 'insertions/' => 'insertions#index'
+  get 'insertions/archive' => 'insertions#archive'
+  post 'insertions/:id/hide' => 'insertions#hide'
+  post 'insertions/hide_all' => 'insertions#hide_all'
+  post 'insertions/:id/promote' => 'insertions#promote'
 
   post 'apartments/create' => 'apartments#create'
   get 'apartments/' => 'apartments#index'
