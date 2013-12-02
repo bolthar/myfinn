@@ -36,9 +36,16 @@
         </div>
       <% end %>
       <div style="clear:both;"></div>
-    </div>
-    <div class="item-data">
-      <a href="<%= apartment.finn_link %>">See on Finn.no</a>
+  </div>
+  <div class="item-data">
+  <a href="insertions/<%= insertion.id %>/promote">Consider this insertion</a>
+  </div>
+  <div class="item-data">
+    <a href="<%= apartment.finn_link %>">See on Finn.no</a>
+  </div>
+</div>
+    <div class="pull-right" style="margin-right:10px;margin-top:5px;">
+      <a href="/insertions/<%= apartment.id %>/hide">Hide</a>
     </div>
   <div style="clear:both;"></div>
 </div>
