@@ -59,6 +59,10 @@ module Myfinn
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.google_maps_key =  YAML.load_file(Rails.root.join('config', 'config.yml'))[Rails.env]['google_maps_key']
+
+    config_file = YAML.load_file(Rails.root.join('config', 'config.yml'))[Rails.env]
+    config.google_maps_key = config_file['google_maps_key']
+    config.insertion_filter_url = config_file['insertion_filter_url']
+
   end
 end
