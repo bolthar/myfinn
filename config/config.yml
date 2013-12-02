@@ -5,8 +5,8 @@ defaults: &defaults
   insertion_notification_threshold: 5
   twilio_account_sid:  <YOUR TWILIO ACCOUNT SID>
   twilio_auth_token: <YOUR TWILIO ACCOUNT TOKEN>
-  twilio_source_number: <YOUR TWILIO SOURCE NUMBER, WITH COUNTRY CODE, WITH SINGLE QUOTES, EXAMPLE: '+1555404040'>
-  twilio_target_number: <YOUR TWILIO TARGET NUMBER, WITH COUNTRY CODE, WITH SINGLE QUOTES, EXAMPLE: '+47911200303'>
+  twilio_source_number: <YOUR TWILIO SOURCE NUMBER, WITH COUNTRY CODE, WITH SINGLE QUOTES, EXAMPLE '+1555404040'>
+  twilio_target_number: <YOUR TWILIO TARGET NUMBER, WITH COUNTRY CODE, WITH SINGLE QUOTES, EXAMPLE '+47911200303'>
 
 development:
   <<: *defaults
