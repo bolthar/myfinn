@@ -18,7 +18,7 @@ class InsertionsController < ApplicationController
   end
 
   def hide_all
-    Insertion.where("visualized = FALSE").each do |ins|
+    Insertion.where("visualized = ?", false).each do |ins|
       ins.visualized = true
       ins.save
     end
