@@ -1,0 +1,7 @@
+
+<div id="items">
+  <div style="margin-top:10px;">
+  <% @insertions.map { |x| x.apartment }.each do |apt| %>
+    <%= render :partial => "item", :locals => { :apartment => apt } %>
+  <% end %>
+</div>
