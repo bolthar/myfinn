@@ -65,7 +65,6 @@ class Parser
       apartment.code = finn_id
       return apartment
     rescue Exception => ex
-      p ex
       return PARSE_ERROR
     end
   end
@@ -73,7 +72,6 @@ class Parser
   def update_locations
     agent = Mechanize.new
     Apartment.all.each do |apt|
-      p apt.title
       page = agent.get("#{BASE_PATH}#{apt.code}")
       element = page.search(".map-track").first
       if element && element.inner_html != ""
@@ -86,6 +84,18 @@ class Parser
       apt.save
     end
 
+  end
+
+  def parse_all_page(page_url)
+    agent = Mechanize.new
+    apartments = [] 
+    page = agent.get(page_url)
+    page.search('div.objectinfo//h2.mtn//a').each do |elem|
+      finn_id = elem['href'].split("=").last
+      existing_apartment = Apartment.where("code = ?", finn_id).first
+      apartments << (existing_apartment || self.parse(finn_id))
+    end
+    return apartments
   end
 
   private 
