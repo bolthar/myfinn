@@ -48,9 +48,13 @@ namespace :myfinn do
     min_insertion_size = apartments.map { |x| x.size.split("m").first.to_i }.min
     max_insertion_price = apartments.map { |x| x.rent }.max
     min_insertion_price = apartments.map { |x| x.rent }.min
-
-    message = "MyFinn watcher - #{no_of_insertions} new insertions of interests, from #{min_insertion_size} to #{max_insertion_size} m2, from #{min_insertion_price} to #{max_insertion_price} NOK"
-      
+    
+    message = "MYFINN WATCHER - "
+    if(insertions.count != 1)
+      message += "#{no_of_insertions} new insertions of interests, from #{min_insertion_size} to #{max_insertion_size} m2, from #{min_insertion_price} to #{max_insertion_price} NOK"
+    else
+      message = "A wild insertion appears! #{min_insertion_size} m2, #{min_insertion_price} NOK"
+    end
     client = Twilio::REST::Client.new(account_sid, auth_token)
     account = client.account
     account.sms.messages.create({:from => from_no, :to => to_no, :body => message})
