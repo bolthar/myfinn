@@ -1,7 +1,7 @@
 
 defaults: &defaults
   google_maps_key: <YOUR_GOOGLE_API_KEY>
-  insertion_filter_url: http://www.finn.no/finn/realestate/lettings/result?PRICE_FROM=&sort=1&ESTATE_SIZE/LIVING_AREA_FROM=75&areaId=20061&PRICE_TO=17000&ESTATE_SIZE/LIVING_AREA_TO=&NUMBER_OF_BEDROOMS_FROM=2&NUMBER_OF_BEDROOMS_TO=2
+  insertion_filter_url: <YOUR FINN QUERY HERE, EXAMPLE - http://www.finn.no/finn/realestate/lettings/result?PRICE_FROM=&sort=1&ESTATE_SIZE/LIVING_AREA_FROM=75&areaId=20061&PRICE_TO=17000&ESTATE_SIZE/LIVING_AREA_TO=&NUMBER_OF_BEDROOMS_FROM=2&NUMBER_OF_BEDROOMS_TO=2>
   insertion_notification_threshold: 5
 
 development:
