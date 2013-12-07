@@ -4,7 +4,9 @@ Myfinn::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => 'apartments#index'
+  root :to => 'insertions#index'
+
+  get 'insertions/' => 'insertions#index'
 
   post 'apartments/create' => 'apartments#create'
   get 'apartments/' => 'apartments#index'
@@ -22,6 +24,7 @@ Myfinn::Application.routes.draw do
 
   get 'calendar/' => 'calendar#index'
   get 'calendar/events' => 'calendar#events'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

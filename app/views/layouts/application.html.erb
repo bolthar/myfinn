@@ -13,6 +13,7 @@
         <a class="brand" href="/">MyFinn</a>
         <% if current_user %>
           <ul class="nav">
+            <li><%= link_to "New insertions", insertions_path %></li>
             <li><%= link_to "Apartments", apartments_path %></li>
             <li><%= link_to "Calendar", calendar_path %></li>
             <li class="divider-vertical" />
