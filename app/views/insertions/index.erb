@@ -1,5 +1,8 @@
 
 <div id="items">
+  <div style="margin-top:10px;">
+    <a href="/insertions/hide_all">Hide all insertions</a>
+  </div>
   <% @insertions.each do |ins| %>
     <%= render :partial => "item", :locals => { :apartment => ins.apartment, :insertion => ins } %>
   <% end %>
