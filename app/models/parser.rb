@@ -30,7 +30,8 @@ class Parser
       end
       rent = page.search("div.mod//div.inner//dl.multicol//dd").first.inner_html
       apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
-      deposit = get_value_of(price_infos, "Depositum").split(",").first
+      deposit = nil
+      #deposit = get_value_of(price_infos, "Depositum").split(",").first
       apartment.deposit = deposit ? deposit.gsub(/[^0-9]/, "").to_i : nil
       house_info = parse_objectinfo(page, "Fakta om boligen")
       sizes = [get_value_of(house_info, "Primærrom"), get_value_of(house_info, "Boligareal"), get_value_of(house_info, "Bruksareal")]
