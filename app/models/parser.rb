@@ -28,6 +28,7 @@ class Parser
       if image_src
         apartment.image_src = image_src['data-main']
       end
+      p page.search("div.mod//div.inner//dl.multicol//dd").first.inner_html
       price_infos = parse_objectinfo(page, "Prisinformasjon")
       rent = get_value_of(price_infos, "Leie pr måned").split(",").first
       apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
@@ -38,7 +39,6 @@ class Parser
       apartment.size = sizes.select { |x| x != "" }.first 
       apartment.floor = get_value_of(house_info, "Etasje").gsub(/[^0-9]/, "").to_i
       apartment.location = page.search("div[@data-automation-id='map-container']//a").first.inner_html
-      p "HERE3"
       dates = get_value_of(house_info, "Leieperiode")
       if dates != ""
         if dates =~ /\-/
@@ -48,7 +48,6 @@ class Parser
           apartment.start_date = DateTime.parse(dates.strip)
         end
       end
-      p "GERE1"
       parse_features(page).each do |text|
         feature = Feature.find_by_description(text)
         unless feature
