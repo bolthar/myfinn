@@ -53,7 +53,7 @@ namespace :myfinn do
     if(insertions.count != 1)
       message += "#{no_of_insertions} new insertions of interests, from #{min_insertion_size} to #{max_insertion_size} m2, from #{min_insertion_price} to #{max_insertion_price} NOK"
     else
-      message = "A wild insertion appears! #{min_insertion_size} m2, #{min_insertion_price} NOK"
+      message += "A wild insertion appears! #{min_insertion_size} m2, #{min_insertion_price} NOK"
     end
     client = Twilio::REST::Client.new(account_sid, auth_token)
     account = client.account
