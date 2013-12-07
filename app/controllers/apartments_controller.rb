@@ -5,7 +5,7 @@ class ApartmentsController < ApplicationController
 
   def index
     @filter = params[:status] ? params[:status].to_i : 3
-    @apartments = Apartment.all(:order => 'rating DESC, created_at DESC', :conditions => "status <= #{@filter} AND to_be_considered = TRUE")
+    @apartments = Apartment.where("status <= ? AND to_be_considered = ?", @filter, true).order("rating DESC, created_at DESC")
   end
 
   def create

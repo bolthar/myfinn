@@ -63,6 +63,7 @@ module Myfinn
     config_file = YAML.load_file(Rails.root.join('config', 'config.yml'))[Rails.env]
     config.google_maps_key = config_file['google_maps_key']
     config.insertion_filter_url = config_file['insertion_filter_url']
+    config.insertion_notification_threshold = config_file['insertion_notification_threshold'].to_i
 
   end
 end

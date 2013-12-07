@@ -2,7 +2,7 @@
 class InsertionsController < ApplicationController
 
   def index
-    @insertions = Insertion.where.("visualized = FALSE").order("created_at DESC")
+    @insertions = Insertion.where("visualized = ?", false).order("created_at")
   end
 
   def archive
@@ -14,7 +14,7 @@ class InsertionsController < ApplicationController
     insertion = Insertion.find(params[:id])
     insertion.visualized = true
     insertion.save
-    redirect_to :index
+    redirect_to insertions_path
   end
 
   def hide_all
@@ -22,14 +22,17 @@ class InsertionsController < ApplicationController
       ins.visualized = true
       ins.save
     end
-    redirect_to :index
+    redirect_to insertions_path
   end
 
   def promote
     insertion = Insertion.find(params[:id])
     insertion.apartment.to_be_considered = true
+    insertion.apartment.user = current_user
+    insertion.visualized = true
+    insertion.save
     insertion.apartment.save
-    redirect_to apartment_path(insertion.apartment)
+    redirect_to :controller => :apartments, :action => :show, :id => insertion.apartment.id
   end
 
 end

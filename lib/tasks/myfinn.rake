@@ -36,6 +36,7 @@ namespace :myfinn do
   end
 
   def notify_new_insertions(no_of_insertions)
+    p "notifiying..."
     #twilio
   end
 
