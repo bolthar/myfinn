@@ -28,9 +28,7 @@ class Parser
       if image_src
         apartment.image_src = image_src['data-main']
       end
-      p page.search("div.mod//div.inner//dl.multicol//dd").first.inner_html
-      price_infos = parse_objectinfo(page, "Prisinformasjon")
-      rent = get_value_of(price_infos, "Leie pr måned").split(",").first
+      rent = page.search("div.mod//div.inner//dl.multicol//dd").first.inner_html
       apartment.rent = rent ? rent.gsub(/[^0-9]/, "").to_i : nil 
       deposit = get_value_of(price_infos, "Depositum").split(",").first
       apartment.deposit = deposit ? deposit.gsub(/[^0-9]/, "").to_i : nil
