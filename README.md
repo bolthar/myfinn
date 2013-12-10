@@ -44,7 +44,7 @@ Watcher
 
 It is possible also to specify a filter and auto-import all the matching results for later screening. In the <tt>config.yml</tt> file, you can set the <tt>insertion_filter_url</tt> parameter to the URL corresponding to a given filter created on finn.no (complete with the domain name). If you do, you can then call the rake task <tt>myfinn:poll</tt> to run the job collecting all the new insertions matching the filter. You can then automate the polling by, for example, creating a cron job running that rake task. Example (search, every hour, for all new insertion with a monthly cost inferior to 17000 NOK/month):
 
-- Set the <tt>insertion_filter_url</tt> parameter in <tt>config.yml</tt> to <tt>http://www.finn.no/finn/realestate/lettings/result?PRICE_FROM=&sort=1&ESTATE_SIZE/LIVING_AREA_FROM=75&areaId=20061&PRICE_TO=17000</tt> (a filter screaming for all insertion with a monthly cost less than 17000 NOK a month.
+- Set the <tt>insertion_filter_url</tt> parameter in <tt>config.yml</tt> to <tt>http://www.finn.no/finn/realestate/lettings/result?PRICE_FROM=&sort=1&ESTATE_SIZE/LIVING_AREA_FROM=75&areaId=20061&PRICE_TO=17000</tt>
 
 - Set up a cron job by creating a bash script calling the rake job (<tt>bundle exec rake myfinn:poll</tt>) and placing it into the <tt>/etc/cron.hourly</tt> folder
 
@@ -53,7 +53,7 @@ That's it - the new insertions will be displayed in the appropriate section and 
 SMS Notifications (via Twilio)
 ------------------------------
 
-If you own a Twilio account you can also get an SMS notification when the watcher process finds new insertions. For that, you will need to set the appropriate informations on your <tt>config.yml</tt> file, as explained there, and call the rake task <tt>myfinn:notify</tt>. As for with the watcher process, you can automate the job using cron or another scheduler.
+If you own a Twilio account you can also get an SMS notification when the watcher process finds new insertions. For that, you will need to set the appropriate informations on your <tt>config.yml</tt> file, as explained there, and call the rake task <tt>myfinn:notify</tt>. Like with the watcher process, you can automate the job using cron or another scheduler.
 
 
 Cool. What now?
