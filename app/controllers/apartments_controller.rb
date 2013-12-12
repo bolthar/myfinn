@@ -15,6 +15,7 @@ class ApartmentsController < ApplicationController
       apartment = Parser.new.parse(finncode)
       if !apartment.kind_of?(String)
         apartment.user = current_user
+        apartment.to_be_considered = true
         apartment.save
         render :json => { :status => "ok", :id => apartment.id }
       else
