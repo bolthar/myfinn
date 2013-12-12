@@ -116,4 +116,5 @@ body {
 
 #sunPositions .seasonContainer {
   float: left;
+  margin-left: 5px;
 }
