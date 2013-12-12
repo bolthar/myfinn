@@ -38,7 +38,7 @@
         <div style="clear:both;"></div>
       </div>
       <div id="map" class="tab-pane">
-        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng, :address => @apartment.location } %>
+        <%= render :partial => "map", :locals => { :lat => @apartment.lat, :lng => @apartment.lng, :address => @apartment.location , :seasons => @apartment.seasons } %>
       </div>
       <div id="appointment" class="tab-pane">
         <%= render :partial => "status", :locals => { :select_id => "change-status", :status => @apartment.status, :label => "Status" } %>

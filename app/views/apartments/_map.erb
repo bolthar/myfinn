@@ -31,6 +31,10 @@
 </script>
 
 <div>
-  <h3><%= address %></h3>
+  <div>
+    <h3 style="float:left;"><%= address %></h3>
+    <div style="float:left;"><%= render :partial => "sun_position", :locals => { :seasons => seasons }  %></div>
+    <div style="clear:both;"></div>
+  </div>
   <div id="map-container"></div>
 </div>

@@ -22,4 +22,8 @@ class Apartment < ActiveRecord::Base
     self.lng = position[1].to_d
   end
 
+  def seasons
+    return Season.all(self)
+  end
+
 end

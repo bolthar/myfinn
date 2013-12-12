@@ -1,0 +1,12 @@
+
+<div id="sunPositions">
+  <% seasons.each do |season| %>
+    <div class="seasonContainer">
+      <a href="<%= season.suncalc_href %>" target="_blank">
+        <img src="<%= "/assets/#{season.name}.png" %>" />
+        <%= season.name %>
+      </a>
+    </div>
+  <% end %>
+  <div style="clear:both;"></div>
+</div>
