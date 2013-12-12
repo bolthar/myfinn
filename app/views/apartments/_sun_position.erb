@@ -3,7 +3,7 @@
   <% seasons.each do |season| %>
     <div class="seasonContainer">
       <a href="<%= season.suncalc_href %>" target="_blank">
-        <img src="<%= "/assets/#{season.name}.png" %>" />
+        <img src="<%= "/assets/#{season.name.downcase}.png" %>" />
         <%= season.name %>
       </a>
     </div>
