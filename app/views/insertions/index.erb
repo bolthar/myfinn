@@ -3,6 +3,11 @@
   <div style="margin-top:10px;">
     <a href="/insertions/hide_all">Hide all insertions</a>
   </div>
+  <%= form_tag("/filter/update", :method => :post) do %>
+    <%= label_tag(:filter_url, "finn.no filter") %>
+    <%= text_field_tag(:filter_url) %>
+    <%= submit_tag("Save") %>
+  <% end %>
   <% @insertions.each do |ins| %>
     <%= render :partial => "item", :locals => { :apartment => ins.apartment, :insertion => ins } %>
   <% end %>

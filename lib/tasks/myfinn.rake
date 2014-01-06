@@ -13,7 +13,7 @@ namespace :myfinn do
 
   task :poll => :environment do
     parser = Parser.new
-    apartments = parser.parse_all_page(Rails.application.config.insertion_filter_url)
+    apartments = parser.parse_all_page(Filter.default)
     apartments.each do |apt|
       if apt.new_record?
         apt.save

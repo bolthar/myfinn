@@ -29,6 +29,8 @@ Myfinn::Application.routes.draw do
   get 'calendar/' => 'calendar#index'
   get 'calendar/events' => 'calendar#events'
 
+  post 'filter/update' => 'filter#update'
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
